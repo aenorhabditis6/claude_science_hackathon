@@ -1,0 +1,13 @@
+.venv/
+__pycache__/
+*.pyc
+.ipynb_checkpoints/
+*.h5ad
+*.h5mu
+data/
+outputs/
+interpretations/
+.DS_Store
+.env
+
+# note: figures/ is intentionally committed (slide assets); *.h5ad data stays out
