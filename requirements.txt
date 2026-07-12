@@ -1,0 +1,17 @@
+# ShiftScope runtime deps. Keep this minimal.
+scanpy
+anndata
+h5py
+s3fs           # stream the Marson Perturb-seq h5ad straight from public S3
+pot            # Sinkhorn optimal transport (the `ot` package)
+scikit-learn
+umap-learn
+leidenalg
+igraph          # Leiden's fast igraph backend (localize.py)
+gradio
+anthropic
+numpy
+pandas
+scipy
+matplotlib
+typing_extensions>=4.15   # anndata needs `sentinel`; Colab ships an older one
