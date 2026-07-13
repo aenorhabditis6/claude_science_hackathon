@@ -2,6 +2,7 @@
 
 Import the modules you need, e.g. `from shiftscope import io, embed, compare`.
 The pipeline order is: io -> embed -> compare -> localize -> drivers -> interpret -> app.
+New here? `from shiftscope.quickstart import run; run()` runs the whole thing in one line.
 
 `prioritize` is an analysis branch on top of `compare.rank` (or any hit table): it ranks
 screen hits by strong-phenotype x under-studied (grounded in real PubMed counts + a Claude
