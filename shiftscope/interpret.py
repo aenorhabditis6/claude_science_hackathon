@@ -64,7 +64,15 @@ def assemble_evidence(adata, distances, shift_table=None, drivers=None):
 
 
 def interpret(evidence, model=MODEL, log_dir="interpretations", max_tokens=1500):
-    """Send the evidence to Claude; return the write-up and log the exact prompt+inputs."""
+    """Send the evidence to Claude; return the write-up and log the exact prompt+inputs.
+
+    Degrades gracefully with no `ANTHROPIC_API_KEY` (returns a placeholder instead of
+    raising), so running the notebook top to bottom without a key never halts here.
+    """
+    if not os.environ.get("ANTHROPIC_API_KEY"):
+        return {"output": "(set ANTHROPIC_API_KEY to enable Claude's interpretation)",
+                "model": model, "evidence": evidence, "skipped": True}
+
     import anthropic
 
     user = (

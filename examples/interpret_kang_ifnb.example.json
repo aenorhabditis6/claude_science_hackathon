@@ -1,0 +1,129 @@
+{
+  "model": "claude-sonnet-5",
+  "system": "You are a careful computational biologist interpreting a single-cell comparison. You are given only structured evidence computed by an upstream tool (distribution distances, which cell clusters shifted, and the top differentially expressed genes). Write a short, decision-useful rationale for a bench scientist.\n\nRules:\n- Ground every claim in a number from the evidence. When you cite one, name it (e.g. \"E-distance 14.9, p=0.001\" or \"cluster 3, log2 enrichment +1.8\").\n- Do not invent genes, pathways, cell types, statistics, or citations. If the evidence is insufficient for a claim, say so.\n- Structure: (1) is the shift real and how large; (2) where it localizes in cell-state space; (3) what the driver genes suggest about pathway / cell state; (4) one candidate mechanism or target to follow up, with the caveat that this is hypothesis-generating.\n- Be concise. Flag uncertainty honestly.",
+  "user_prompt": "Here is the structured evidence from a ShiftScope comparison. Interpret it per your instructions.\n\n```json\n{\n  \"dataset\": \"unknown\",\n  \"reference\": \"ctrl\",\n  \"query\": \"stim\",\n  \"n_reference_cells\": 2932,\n  \"n_query_cells\": 2765,\n  \"distances\": {\n    \"edistance\": 215.6528881913174,\n    \"p_value\": 0.000999000999000999,\n    \"mmd\": 0.347115583966485,\n    \"sinkhorn\": 0.125672264523418\n  },\n  \"shifted_clusters\": [\n    {\n      \"cluster\": \"1\",\n      \"direction\": \"lost\",\n      \"log2_enrichment\": -9.95,\n      \"qval\": 0.0,\n      \"n_query\": 1,\n      \"n_ref\": 1026\n    },\n    {\n      \"cluster\": \"9\",\n      \"direction\": \"gained\",\n      \"log2_enrichment\": 9.45,\n      \"qval\": 1.93e-96,\n      \"n_query\": 294,\n      \"n_ref\": 0\n    },\n    {\n      \"cluster\": \"8\",\n      \"direction\": \"gained\",\n      \"log2_enrichment\": 8.79,\n      \"qval\": 0.0,\n      \"n_query\": 1257,\n      \"n_ref\": 5\n    },\n    {\n      \"cluster\": \"7\",\n      \"direction\": \"gained\",\n      \"log2_enrichment\": 8.75,\n      \"qval\": 0.0,\n      \"n_query\": 937,\n      \"n_ref\": 3\n    },\n    {\n      \"cluster\": \"2\",\n      \"direction\": \"lost\",\n      \"log2_enrichment\": -8.53,\n      \"qval\": 2.62e-148,\n      \"n_query\": 1,\n      \"n_ref\": 489\n    },\n    {\n      \"cluster\": \"5\",\n      \"direction\": \"lost\",\n      \"log2_enrichment\": -8.16,\n      \"qval\": 8.09e-43,\n      \"n_query\": 0,\n      \"n_ref\": 144\n    },\n    {\n      \"cluster\": \"0\",\n      \"direction\": \"lost\",\n      \"log2_enrichment\": -7.77,\n      \"qval\": 0.0,\n      \"n_query\": 8,\n      \"n_ref\": 1178\n    },\n    {\n      \"cluster\": \"10\",\n      \"direction\": \"gained\",\n      \"log2_enrichment\": 5.52,\n      \"qval\": 1.93e-41,\n      \"n_query\": 143,\n      \"n_ref\": 3\n    },\n    {\n      \"cluster\": \"4\",\n      \"direction\": \"gained\",\n      \"log2_enrichment\": 1.05,\n      \"qval\": 0.00275,\n      \"n_query\": 49,\n      \"n_ref\": 25\n    }\n  ],\n  \"top_up_genes\": [\n    \"ISG15\",\n    \"IFITM3\",\n    \"ISG20\",\n    \"APOBEC3A\",\n    \"TNFSF10\",\n    \"LY6E\",\n    \"IFIT3\",\n    \"CXCL10\",\n    \"RSAD2\",\n    \"IFI6\",\n    \"IFIT1\",\n    \"IFIT2\",\n    \"IDO1\",\n    \"CXCL11\",\n    \"MX1\"\n  ],\n  \"top_down_genes\": [\n    \"FTH1\",\n    \"IL8\",\n    \"PFN1\",\n    \"RPL7\",\n    \"ACTB\",\n    \"OAZ1\",\n    \"RPL6\",\n    \"RPL15\",\n    \"RPL10\",\n    \"GAPDH\",\n    \"MARCKSL1\",\n    \"CD14\",\n    \"RPS3A\",\n    \"RPL8\",\n    \"S100A8\"\n  ]\n}\n```",
+  "evidence": {
+    "dataset": "unknown",
+    "reference": "ctrl",
+    "query": "stim",
+    "n_reference_cells": 2932,
+    "n_query_cells": 2765,
+    "distances": {
+      "edistance": 215.6528881913174,
+      "p_value": 0.000999000999000999,
+      "mmd": 0.347115583966485,
+      "sinkhorn": 0.125672264523418
+    },
+    "shifted_clusters": [
+      {
+        "cluster": "1",
+        "direction": "lost",
+        "log2_enrichment": -9.95,
+        "qval": 0.0,
+        "n_query": 1,
+        "n_ref": 1026
+      },
+      {
+        "cluster": "9",
+        "direction": "gained",
+        "log2_enrichment": 9.45,
+        "qval": 1.93e-96,
+        "n_query": 294,
+        "n_ref": 0
+      },
+      {
+        "cluster": "8",
+        "direction": "gained",
+        "log2_enrichment": 8.79,
+        "qval": 0.0,
+        "n_query": 1257,
+        "n_ref": 5
+      },
+      {
+        "cluster": "7",
+        "direction": "gained",
+        "log2_enrichment": 8.75,
+        "qval": 0.0,
+        "n_query": 937,
+        "n_ref": 3
+      },
+      {
+        "cluster": "2",
+        "direction": "lost",
+        "log2_enrichment": -8.53,
+        "qval": 2.62e-148,
+        "n_query": 1,
+        "n_ref": 489
+      },
+      {
+        "cluster": "5",
+        "direction": "lost",
+        "log2_enrichment": -8.16,
+        "qval": 8.09e-43,
+        "n_query": 0,
+        "n_ref": 144
+      },
+      {
+        "cluster": "0",
+        "direction": "lost",
+        "log2_enrichment": -7.77,
+        "qval": 0.0,
+        "n_query": 8,
+        "n_ref": 1178
+      },
+      {
+        "cluster": "10",
+        "direction": "gained",
+        "log2_enrichment": 5.52,
+        "qval": 1.93e-41,
+        "n_query": 143,
+        "n_ref": 3
+      },
+      {
+        "cluster": "4",
+        "direction": "gained",
+        "log2_enrichment": 1.05,
+        "qval": 0.00275,
+        "n_query": 49,
+        "n_ref": 25
+      }
+    ],
+    "top_up_genes": [
+      "ISG15",
+      "IFITM3",
+      "ISG20",
+      "APOBEC3A",
+      "TNFSF10",
+      "LY6E",
+      "IFIT3",
+      "CXCL10",
+      "RSAD2",
+      "IFI6",
+      "IFIT1",
+      "IFIT2",
+      "IDO1",
+      "CXCL11",
+      "MX1"
+    ],
+    "top_down_genes": [
+      "FTH1",
+      "IL8",
+      "PFN1",
+      "RPL7",
+      "ACTB",
+      "OAZ1",
+      "RPL6",
+      "RPL15",
+      "RPL10",
+      "GAPDH",
+      "MARCKSL1",
+      "CD14",
+      "RPS3A",
+      "RPL8",
+      "S100A8"
+    ]
+  },
+  "output": "## Interpretation\n\n**1. Is the shift real, and how large?**\nYes \u2014 this is a large, highly significant shift. E-distance = 215.65 (p = 0.001), with corroborating MMD = 0.347 and Sinkhorn = 0.126. Given only ~2,900\u20132,800 cells per condition, an E-distance this large with p<0.001 indicates the stim condition is not a subtle perturbation but a near-total remodeling of transcriptional state.\n\n**2. Where does it localize?**\nThe shift is not confined to one subpopulation \u2014 it looks like a near-complete reorganization of cluster structure. Clusters 1, 2, 5, and 0 are essentially emptied out under stim (log2 enrichment \u22129.95, \u22128.53, \u22128.16, \u22127.77 respectively; e.g., cluster 1 goes from 1026 ref cells to 1 query cell), while clusters 9, 8, 7, and 10 are essentially new query-specific states (log2 enrichment +9.45, +8.79, +8.75, +5.52; e.g., cluster 9 goes from 0 ref cells to 294 query cells). Cluster 4 shows only a mild gain (+1.05, qval 0.00275), suggesting it's less affected. Practically, this pattern is most consistent with the *entire* reference cell-state landscape being replaced by a new one under stimulation, rather than one cluster shifting into another \u2014 the mapping between \"lost\" and \"gained\" clusters can't be resolved from this evidence alone.\n\n**3. What do the driver genes suggest?**\nThe top up-regulated genes are a textbook type-I/II interferon-stimulated gene (ISG) signature: ISG15, IFITM3, ISG20, IFIT1/2/3, MX1, RSAD2, LY6E, IFI6, plus chemokines CXCL10/CXCL11 and IDO1 (an IFN-\u03b3-inducible tryptophan-catabolizing enzyme) and APOBEC3A. This strongly suggests interferon pathway activation as the dominant driver of the \"gained\" clusters (7, 8, 9, 10).\n\nThe top down-regulated genes are dominated by ribosomal proteins (RPL7, RPL6, RPL15, RPL10, RPL8, RPS3A), housekeeping/cytoskeletal genes (ACTB, PFN1, GAPDH, MARCKSL1), FTH1 (iron storage), and myeloid markers CD14 and S100A8, plus IL8. This pattern reads as reduced translational/housekeeping output alongside possible loss or de-differentiation of a CD14+/S100A8+ monocyte-like population \u2014 consistent with the \"lost\" clusters (0, 1, 2, 5).\n\n**4. Candidate mechanism / target (hypothesis-generating)**\nThe pattern is consistent with an interferon-stimulation experiment (e.g., IFN-\u03b1/\u03b2/\u03b3 treatment) driving cells from a resting/monocytic transcriptional state (CD14, S100A8) into an ISG-high state (ISG15, IFIT1/3, MX1, CXCL10/11, IDO1). If validating a target, IDO1 and CXCL10/CXCL11 are attractive because they mark a more \"actionable\" downstream inflammatory/immunomodulatory axis rather than core ISGs. However, this is inferred purely from marker gene identity and cluster enrichment tables \u2014 no cell-type labels, pathway enrichment stats, or experimental metadata were provided, so this should be treated as a starting hypothesis for confirmation (e.g., by checking IFN receptor expression, treatment metadata, or independent pathway enrichment testing) rather than a conclusion.",
+  "stop_reason": "end_turn",
+  "timestamp": "2026-07-14T01:30:59"
+}

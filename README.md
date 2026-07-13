@@ -8,6 +8,8 @@
 
 Built for **Built with Claude: Life Sciences** (Anthropic × Gladstone). It is condition-agnostic: control vs perturbation, disease vs healthy, young vs old, cell type vs cell type. One tool, one workflow.
 
+The whole project was written this week with **Claude Code**, and Claude runs inside the tool at runtime (via the Anthropic SDK) to write the interpretation and to score the prioritization, always grounded in numbers ShiftScope computed.
+
 ## See it in 20 seconds
 
 Click the Colab badge above and **Run all**. Or, anywhere:
@@ -41,6 +43,8 @@ Measuring a shift is easy. The real question is *which of hundreds of screen hit
 | **Drivers** | **Wilcoxon** rank-sum DE inside the shifted clusters -> top genes |
 | **Interpret** | Claude turns the numbers into a cited write-up; every claim points to a value we passed in |
 | **Prioritize** | phenotype strength × PubMed coverage -> Claude keep/skip verdict -> a "validate these" shortlist |
+
+Every Claude call logs its exact prompt and the evidence it was given, so each claim traces back to data. See a real [interpretation log](examples/interpret_kang_ifnb.example.json) and [prioritization log](examples/prioritize_marson.example.json).
 
 ## We checked where it breaks
 

@@ -11,3 +11,6 @@ interpretations/
 .env
 
 # note: figures/ is intentionally committed (slide assets); *.h5ad data stays out
+
+# editor/office lock files
+~$*

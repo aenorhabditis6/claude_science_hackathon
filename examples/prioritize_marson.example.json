@@ -1,0 +1,57 @@
+{
+  "model": "claude-sonnet-5",
+  "system": "You are a computational biologist triaging hits from a genetic screen for experimental follow-up. For each hit you are given its phenotype strength (how large an effect knocking the gene out had) and a real PubMed paper count measuring how well studied the gene already is in the relevant biology.\n\nYou are prioritizing for VALIDATION, so the prize is a strong phenotype on an UNDER-STUDIED gene: a big effect nobody has explained yet. A strong effect on a famous, well-characterized gene is lower priority (likely already known); a weak effect is low priority regardless.\n\nRules:\n- Ground the novelty score in the PubMed count you were given; a low count is the evidence of \"under-studied\". Do not invent facts about specific papers.\n- Do not claim a gene's function unless it is broadly known; if unsure, say so briefly.\n- Reply with ONLY a JSON array, one object per gene, no prose or code fences:\n  [{\"gene\": str, \"novelty\": int 1-5 (5 = strong phenotype + very under-studied), \"recommendation\": \"prioritize\" | \"maybe\" | \"skip\", \"verdict\": one short sentence}]",
+  "user_prompt": "Context for the PubMed counts: papers mentioning the gene together with T cell / immune / lymphocyte. Phenotype strength is the effect size of the knockout (higher = stronger), ranked 1 = strongest. Score these 8 hits:\n\n```json\n[\n  {\n    \"gene\": \"TADA2B\",\n    \"phenotype_strength\": 5260.0,\n    \"phenotype_rank\": 1,\n    \"pubmed_count\": 1\n  },\n  {\n    \"gene\": \"SGF29\",\n    \"phenotype_strength\": 4869.0,\n    \"phenotype_rank\": 2,\n    \"pubmed_count\": 4\n  },\n  {\n    \"gene\": \"ELOF1\",\n    \"phenotype_strength\": 4258.0,\n    \"phenotype_rank\": 3,\n    \"pubmed_count\": 1\n  },\n  {\n    \"gene\": \"CCNC\",\n    \"phenotype_strength\": 4091.0,\n    \"phenotype_rank\": 4,\n    \"pubmed_count\": 14\n  },\n  {\n    \"gene\": \"SUPT7L\",\n    \"phenotype_strength\": 3645.0,\n    \"phenotype_rank\": 5,\n    \"pubmed_count\": 2\n  },\n  {\n    \"gene\": \"VAV1\",\n    \"phenotype_strength\": 3575.0,\n    \"phenotype_rank\": 6,\n    \"pubmed_count\": 564\n  },\n  {\n    \"gene\": \"PMVK\",\n    \"phenotype_strength\": 3528.0,\n    \"phenotype_rank\": 7,\n    \"pubmed_count\": 9\n  },\n  {\n    \"gene\": \"TAF6L\",\n    \"phenotype_strength\": 3486.0,\n    \"phenotype_rank\": 8,\n    \"pubmed_count\": 0\n  }\n]\n```",
+  "evidence": [
+    {
+      "gene": "TADA2B",
+      "phenotype_strength": 5260.0,
+      "phenotype_rank": 1,
+      "pubmed_count": 1
+    },
+    {
+      "gene": "SGF29",
+      "phenotype_strength": 4869.0,
+      "phenotype_rank": 2,
+      "pubmed_count": 4
+    },
+    {
+      "gene": "ELOF1",
+      "phenotype_strength": 4258.0,
+      "phenotype_rank": 3,
+      "pubmed_count": 1
+    },
+    {
+      "gene": "CCNC",
+      "phenotype_strength": 4091.0,
+      "phenotype_rank": 4,
+      "pubmed_count": 14
+    },
+    {
+      "gene": "SUPT7L",
+      "phenotype_strength": 3645.0,
+      "phenotype_rank": 5,
+      "pubmed_count": 2
+    },
+    {
+      "gene": "VAV1",
+      "phenotype_strength": 3575.0,
+      "phenotype_rank": 6,
+      "pubmed_count": 564
+    },
+    {
+      "gene": "PMVK",
+      "phenotype_strength": 3528.0,
+      "phenotype_rank": 7,
+      "pubmed_count": 9
+    },
+    {
+      "gene": "TAF6L",
+      "phenotype_strength": 3486.0,
+      "phenotype_rank": 8,
+      "pubmed_count": 0
+    }
+  ],
+  "output": "```json\n[\n  {\"gene\": \"TADA2B\", \"novelty\": 5, \"recommendation\": \"prioritize\", \"verdict\": \"Strongest phenotype in the set and essentially unstudied in immune context (1 paper) \u2014 top validation candidate.\"},\n  {\"gene\": \"SGF29\", \"novelty\": 5, \"recommendation\": \"prioritize\", \"verdict\": \"Very strong phenotype with minimal immune-related literature (4 papers), a good novel-mechanism candidate.\"},\n  {\"gene\": \"ELOF1\", \"novelty\": 5, \"recommendation\": \"prioritize\", \"verdict\": \"Large effect size and only 1 paper linking it to immune biology \u2014 strong under-studied hit.\"},\n  {\"gene\": \"CCNC\", \"novelty\": 3, \"recommendation\": \"maybe\", \"verdict\": \"Solid phenotype but moderate prior literature (14 papers) suggests some existing characterization.\"},\n  {\"gene\": \"SUPT7L\", \"novelty\": 5, \"recommendation\": \"prioritize\", \"verdict\": \"Strong effect with almost no immune-context literature (2 papers), attractive for follow-up.\"},\n  {\"gene\": \"VAV1\", \"novelty\": 1, \"recommendation\": \"skip\", \"verdict\": \"Decent phenotype but VAV1 is a well-known, heavily studied T cell signaling gene (564 papers), likely already explained.\"},\n  {\"gene\": \"PMVK\", \"novelty\": 3, \"recommendation\": \"maybe\", \"verdict\": \"Moderate phenotype and low-to-moderate literature (9 papers); worth a look but not top-tier novelty.\"},\n  {\"gene\": \"TAF6L\", \"novelty\": 5, \"recommendation\": \"prioritize\", \"verdict\": \"Strong effect size with zero prior immune-related papers, making it a compelling novel hit despite lowest rank in this set.\"}\n]\n```",
+  "timestamp": "2026-07-11T02:12:34"
+}
