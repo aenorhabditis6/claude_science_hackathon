@@ -45,25 +45,20 @@ showing the Gradio app: pick a dataset, click Compare, results appear. Drag that
 slide. PowerPoint plays it while you record the slideshow. Do not run code live on camera. If
 you want to show a run, record it first, then drop in the clip.
 
-**Slides (about 30 seconds each, 6 slides, plain talk):**
+**The script is in each slide's Speaker Notes**, so read it while you record. Seven slides,
+about 25 seconds each:
 
-1. **Title.** "This is ShiftScope. You give it two groups of cells and it tells you how they
-   differ, where, which genes, and what to test next."
-2. **Works on many problems** (show `fig_domains.png`). "The same code runs on immune
-   signaling, infection, blood development, and cell types, and gets the right biology each
-   time. Nothing is hard-coded to one disease."
-3. **One example, start to finish** (show `fig_kang_umap.png`, then the driver list and
-   Claude's note). "Control versus interferon. A clear shift, it lands in specific clusters,
-   and the top genes are the known interferon response. Then Claude explains it, and every
-   claim points to a number we computed."
-4. **The useful part** (show `fig_prioritize.png`). "On a real T-cell CRISPR screen, we rank
-   hits by how strong they are and how little they have been studied. We count papers on
-   PubMed, then Claude gives a keep-or-skip call using that count. Famous genes drop. Strong,
-   under-studied genes rise to the top as things worth testing."
-5. **Does it hold up** (show `fig_calibration.png`). "We checked where it stops working, by
-   cell number and by effect size. And the same ranking recovers a second real screen."
-6. **Close.** "ShiftScope turns 'these look different' into 'test this gene next.' It runs in
-   Colab, it is open source. Thanks."
+1. **Title** — what ShiftScope does in one sentence.
+2. **The problem** — the two hard questions: is the shift real and how big, and which hit to test.
+3. **How it works** — the pipeline (Load, shared PCA, distances, localize, drivers, interpret)
+   and the methods: energy distance + E-test, MMD, Sinkhorn OT, Leiden + Fisher/BH, Wilcoxon DE.
+4. **One example, end to end** — Kang ctrl vs IFN-β, with the real numbers and driver genes.
+5. **From metric to decision** — the Marson screen, PubMed grounding, Claude's keep/skip verdict.
+6. **Does it hold up** — calibration limits, validation across four domains and two screens.
+7. **Close** — the one-line pitch, the stack, the repo link.
+
+The deck now carries the technical detail on the slides; keep the spoken lines short so the
+whole thing stays under 3 minutes.
 
 ---
 
